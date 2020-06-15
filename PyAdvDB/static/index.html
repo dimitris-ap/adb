@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>DocSearch</title>
+
+  <link rel="shortcut icon" href="images/favicon.ico">
+
+  <!-- Bootstrap core CSS -->
+  <link href="css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+  <!-- Font-Awesome CSS -->
+  <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+
+    .card {
+      margin: 5px;
+      width: 100%;
+    }
+  </style>
+  <link href="css/style.css" rel="stylesheet">
+</head>
+<body data-gr-c-s-loaded="true" style="zoom: 1;">
+  <header>
+  <div class="bg-dark collapse" id="navbarHeader" style="">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-8 col-md-7 py-4">
+          <h4 class="text-white">About</h4>
+          <p class="text-white">
+            <a href="http://www.auth.gr/" target="_blank" style="color: #b3b3b3;">Aristotle University of Thessaloniki</a><br>
+            <a href="http://www.csd.auth.gr/" target="_blank" style="color: #b3b3b3;">School of Informatics</a><br>
+            <a href="http://dws.csd.auth.gr/" target="_blank" style="color: #b3b3b3;">MSc Data & Web Science</a><br>
+            <a href="https://elearning.auth.gr/course/view.php?id=11632" target="_blank" style="color: #b3b3b3;">Advanced Topics in Databases</a><br>
+            <a href="http://delab.csd.auth.gr/~tiakas/" target="_blank" style="color: #b3b3b3;">Eleftherios Tiakas</a>
+          </p>
+        </div>
+        <div class="col-sm-4 offset-md-1 py-4">
+          <h4 class="text-white">Student</h4>
+          <ul class="list-unstyled">
+            <li><a href="https://dimitrisap.gr" target="_blank" style="color: #b3b3b3;">Dimitris Apostolou</a></li>
+            <li><a href="mailto:dimapomic@csd.auth.gr" style="color: #b3b3b3;">dimapomic@csd.auth.gr</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="navbar navbar-dark bg-dark shadow-sm">
+    <div class="container d-flex justify-content-between">
+      <a href="javascript:location.reload();" class="navbar-brand d-flex align-items-center">
+        <img src="images/logo.png" style="filter: invert(100%); width: 36px;"/>
+        <strong>DocSearch</strong>
+      </a>
+      <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main role="main">
+
+  <section class="jumbotron text-center">
+    <div class="container">
+      <img src="images/logo.png" style="width: 25px;filter: contrast(0.5) blur(1px);">
+      <img src="images/logo.png" style="width: 80px;filter: contrast(0.5);">
+      <img src="images/logo.png" style="width: 46px;filter: contrast(0.5) blur(1px);">
+      <br><br><br>
+
+      <form>
+        <div class="row">
+          <div class="col-7">
+            <input id="searchQuery" class="form-control form-control-lg" type="text" placeholder="i.e. open source postresql">
+            <div id="emptyQueryMsg" style="display: none; color: #ffa756;">Type something first...</div>
+          </div>
+          <div class="col-3" style="padding-left: 0px;">
+            <select id="distanceSelector" class="form-control form-control-lg"></select>
+          </div>
+          <div class="col-2" style="padding-left: 0px;">
+            <input id="numOfDocsToReturn" class="form-control form-control-lg" type="number" value="10">
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col">
+<!--            <button id="searchBtn" type="button" style="width: 225px;" class="btn btn-primary btn-lg my-2">Search</button>-->
+            <button id="searchBtn" type="button" style="width: 225px;" class="btn btn-primary btn-lg my-2" onclick="$('#loading').show();">
+                Search <span>  </span><i class="fa fa-circle-o-notch fa-spin" style="display: none;" id="loading"></i>
+            </button>
+          </div>
+        </div>
+      </form>
+
+    </div>
+  </section>
+
+
+
+  <div class="album py-5 bg-light">
+    <div id="results" class="container">
+        <!-- results -->
+    </div>
+  </div>
+
+</main>
+
+<footer class="text-muted">
+  <div class="container">
+    <p class="float-right">
+      <a href="#">Back to top</a>
+    </p>
+    <p>MSc Data & Web Science | Advanced Topics in Databases | Dimitris Apostolou | 2020</p>
+  </div>
+</footer>
+
+<script src="js/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script>window.jQuery</script>
+<script src="js/bootstrap.bundle.min.js" integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm" crossorigin="anonymous"></script>
+<script src="js/constants.js"></script>
+<script src="js/distances.js"></script>
+<script src="js/search.js"></script>
+<script>
+  $(document).ready(function(){
+    loadDistances("distanceSelector");
+  });
+
+  $("#searchQuery").on("change paste keyup", function() {
+     $("#emptyQueryMsg").hide(500);
+  });
+</script>
+</body>
+</html>
